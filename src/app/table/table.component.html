@@ -1,18 +1,24 @@
 <div class="table-container">
-    <table class="table">
-        <thead class="">
-          <tr>
-            <th scope="col" *ngFor="let data of listColumns">
-              {{data}}
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let data of listUsers">
-              <td *ngFor="let column of listColumns">
-                  {{data[column]}}
-              </td>
-          </tr>
-        </tbody>
-    </table>      
+  <table class="table">
+    <thead class="">
+      <tr>
+        <th scope="col" *ngFor="let data of listColumns">
+          {{ data }}
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngIf="listUsers.length === 0">
+        <td>
+          <span>No hay datos</span>
+        </td>
+      </tr>
+
+      <tr *ngFor="let data of listUsers">
+        <td *ngFor="let column of listColumns">
+          {{ data[column] }}
+        </td>
+      </tr>
+    </tbody>
+  </table>
 </div>

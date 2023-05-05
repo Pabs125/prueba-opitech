@@ -1,5 +1,5 @@
 <div class="porject-container">
-  <div class="d-flex gap-3">
+  <div class="d-flex gap-3 align-items-center mb-5">
     <select class="form-select" [(ngModel)]="genderFilter">
       <option value="All gender">All gender</option>
       <option value="male">male</option>
@@ -14,7 +14,7 @@
       <option value="81-100">81 - 100</option>
       <option value="101"> +100</option>
     </select>
-    <button type="button" class="btn btn-success" (click)="sendFilter()">Success</button>
+    <button type="button" class="btn btn-outline-success" (click)="sendFilter()">Add Filter</button>
   </div>
 
   <app-table [filterGender]="genderFilter" [filterAge]="ageFilter"></app-table>
