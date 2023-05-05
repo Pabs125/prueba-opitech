@@ -1,4 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
+import { TableComponent } from './table/table.component';
 
 @Component({
   selector: 'app-root',
@@ -7,11 +8,13 @@ import { Component, ViewChild } from '@angular/core';
 })
 export class AppComponent {
   genderFilter: string = "All gender";
+  ageFilter: string = "All age";
+  @ViewChild(TableComponent) child!: TableComponent;
 
   constructor(
   ) { }
 
-  /* sendfilter() {
-    this.child.setFilter('que mas');
-  } */
+  sendFilter() {
+    this.child.applyFilter()
+  }
 }

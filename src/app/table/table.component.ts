@@ -9,23 +9,19 @@ import { UsersList } from '../interface/data';
 })
 export class TableComponent {
   @Input() filterGender: string = '';
+  @Input() filterAge: string = '';
   listUsers: UsersList[] = [];
   dataReserve: UsersList[] = [];
   listColumns: string[] = [];
-  
+  isFiltering: boolean = false;
+
+
   constructor(
     private dataService: DataService
   ) { }
 
   ngOnInit(): void {
-    this.setAllData();
-    this.setFilterGender();
-  }
-
-  ngOnChanges(changes: any) {
-    if (changes.filterGender) {
-      this.setFilterGender();
-    }
+    this.setAllData(); 
   }
 
   async setAllData(): Promise<void> {
@@ -46,11 +42,42 @@ export class TableComponent {
     }
   }
 
-  setFilterGender() {
-    if (this.filterGender == "All gender") {
+  applyFilter(){
+    if (this.filterGender === "All gender" && this.filterAge === "All age"){
       this.listUsers = [...this.dataReserve];
-    } else {
-      this.listUsers = this.dataReserve.filter((item) => item.gender == this.filterGender)
+      this.isFiltering = false;
+      return;
     }
+    this.isFiltering = true;
+    if (this.filterGender !== "All gender"){
+      this.genderFilter();
+    } else{
+      this.listUsers = [...this.dataReserve];
+    }
+    if (this.filterAge !== "All age"){
+      this.ageFilter();
+    } else{
+      this.listUsers = [...this.listUsers];
+    }
+
   }
+
+  genderFilter(){
+    this.listUsers = this.dataReserve.filter((item) => item.gender === this.filterGender);
+  }
+
+  
+  ageFilter(){
+    this.listUsers = this.listUsers.filter((item) => {
+      const min = parseInt(this.filterAge.split("-")[0], 10)
+      const max = parseInt(this.filterAge.split("-")[1], 10)
+      if (min > 100 ){
+        return parseInt(item.age) > min;
+      }
+      return parseInt(item.age) >= min && parseInt(item.age) <= max;
+    });
+  }
+
+
+
 }

@@ -1,20 +1,21 @@
 <div class="porject-container">
   <div class="d-flex gap-3">
-    <select class="form-select" aria-label="Default select example" [(ngModel)]="genderFilter">
+    <select class="form-select" [(ngModel)]="genderFilter">
       <option value="All gender">All gender</option>
       <option value="male">male</option>
       <option value="female">female</option>
     </select>
-    <select class="form-select" aria-label="Default select example">
+    <select class="form-select" [(ngModel)]="ageFilter">
       <option value="All age">All age</option>
-      <option value="0 - 20">0 - 20</option>
-      <option value="21 - 40">21 - 40</option>
-      <option value="41 - 60">41 - 60</option>
-      <option value="61 - 80">61 - 80</option>
-      <option value="81 - 100">81 - 100</option>
-      <option value="+100"> +100</option>
+      <option value="0-20">0 - 20</option>
+      <option value="21-40">21 - 40</option>
+      <option value="41-60">41 - 60</option>
+      <option value="61-80">61 - 80</option>
+      <option value="81-100">81 - 100</option>
+      <option value="101"> +100</option>
     </select>
+    <button type="button" class="btn btn-success" (click)="sendFilter()">Success</button>
   </div>
 
-  <app-table [filterGender]="genderFilter"></app-table>
+  <app-table [filterGender]="genderFilter" [filterAge]="ageFilter"></app-table>
 </div>
